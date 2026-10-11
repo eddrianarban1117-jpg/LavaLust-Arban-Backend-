@@ -39,6 +39,7 @@ defined('PREVENT_DIRECT_ACCESS') OR exit('No direct script access allowed');
  */
 require_once SYSTEM_DIR . 'kernel/Registry.php';
 require_once SYSTEM_DIR . 'kernel/Routine.php';
+if (defined('LAVALUST_DIAGNOSTICS')) error_log('[LAB6_DIAG] routine helpers loaded');
 
 /**
  * Check and load .env file if any
@@ -197,6 +198,7 @@ $router = load_class('router', 'kernel', array(new Controller));
 lava_instance()->router = $router;
 
 require_once APP_DIR . 'config/routes.php';
+if (defined('LAVALUST_DIAGNOSTICS')) error_log('[LAB6_DIAG] routes loaded');
 
 /**
  * Load app-level kernel extensions (MY_* overrides)
@@ -253,5 +255,6 @@ if (php_sapi_name() === 'cli') {
 
 if (empty($url)) $url = '/';
 
+if (defined('LAVALUST_DIAGNOSTICS')) error_log('[LAB6_DIAG] dispatch ' . $method . ' ' . $url);
 $router->initiate($url, $method);
 ?>
