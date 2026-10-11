@@ -98,7 +98,9 @@ class Controller
 		}
 
 		$this->call = load_class('invoker', 'kernel');
+		if (defined('LAVALUST_DIAGNOSTICS')) error_log('[LAB6_DIAG] controller autoload starting');
 		$this->call->initialize();
+		if (defined('LAVALUST_DIAGNOSTICS')) error_log('[LAB6_DIAG] controller autoload finished');
 		$this->before_action();
 	}
 

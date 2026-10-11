@@ -368,10 +368,13 @@ class Invoker {
     public function initialize()
     {
         $autoload = autoload_config();
+		if (defined('LAVALUST_DIAGNOSTICS')) error_log('[LAB6_DIAG] autoload config loaded');
 
 		if(count($autoload['libraries']) > 0)
         {
+			if (defined('LAVALUST_DIAGNOSTICS')) error_log('[LAB6_DIAG] autoload libraries starting');
             $this->library($autoload['libraries']);
+			if (defined('LAVALUST_DIAGNOSTICS')) error_log('[LAB6_DIAG] autoload libraries finished');
         }
 		if(count($autoload['models']) > 0)
         {
