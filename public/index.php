@@ -1,8 +1,5 @@
 <?php
 define('PREVENT_DIRECT_ACCESS', TRUE);
-if (($_GET['__lavalust_diag'] ?? '') === '1') {
-	define('LAVALUST_DIAGNOSTICS', TRUE);
-}
 /**
  * ------------------------------------------------------------------
  * LavaLust - an opensource lightweight PHP MVC Framework

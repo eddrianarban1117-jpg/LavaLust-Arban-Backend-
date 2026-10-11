@@ -454,12 +454,10 @@ class Router
         }
         foreach ($this->routes as $route) {
             if (strtoupper($route['method']) === strtoupper($method) && $this->url_matches_route($url, $route)) {
-                if (defined('LAVALUST_DIAGNOSTICS')) error_log('[LAB6_DIAG] matched ' . $route['method'] . ' ' . $route['url']);
                 $this->execute_callback($url, $route);
                 return;
             }
         }
-        if (defined('LAVALUST_DIAGNOSTICS')) error_log('[LAB6_DIAG] no route matched ' . $method . ' ' . $url);
         empty(config_item('404_override')) ? show_404() : show_404('', '', config_item('404_override'));
     }
 

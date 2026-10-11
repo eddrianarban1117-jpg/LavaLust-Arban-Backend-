@@ -73,6 +73,6 @@ $autoload['models'] = array();
 | -------------------------------------------------------------------
 */
 
-$autoload['configs'] = array('middleware');
+$autoload['configs'] = array();
 
 ?>
