@@ -235,19 +235,15 @@ if (php_sapi_name() === 'cli') {
     $method = 'GET';
     
 } else {
-	$request_path = $_SERVER['PATH_INFO'] ?? '';
+	$request_path = parse_url($_SERVER['REQUEST_URI'] ?? '', PHP_URL_PATH) ?: ($_SERVER['PATH_INFO'] ?? '/');
+	$script_name = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
 
-	if ($request_path === '') {
-		$request_path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH) ?: '/';
-		$script_name = str_replace('\\', '/', $_SERVER['SCRIPT_NAME'] ?? '');
-
-		if ($script_name !== '' && str_starts_with($request_path, $script_name)) {
-			$request_path = substr($request_path, strlen($script_name));
-		} else {
-			$base_path = rtrim(dirname($script_name), '/.');
-			if ($base_path !== '' && str_starts_with($request_path, $base_path . '/')) {
-				$request_path = substr($request_path, strlen($base_path));
-			}
+	if ($script_name !== '' && str_starts_with($request_path, $script_name)) {
+		$request_path = substr($request_path, strlen($script_name));
+	} else {
+		$base_path = rtrim(dirname($script_name), '/.');
+		if ($base_path !== '' && str_starts_with($request_path, $base_path . '/')) {
+			$request_path = substr($request_path, strlen($base_path));
 		}
 	}
 
