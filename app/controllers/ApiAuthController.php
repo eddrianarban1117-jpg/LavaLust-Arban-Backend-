@@ -15,7 +15,7 @@ class ApiAuthController extends Controller
         $this->api->require_method('POST');
         $this->api->rate_limit();
 
-        $input = $this->api->body();
+        $input = $this->api->body(false);
 
         $username = is_string($input['username'] ?? null)
             ? trim($input['username'])
